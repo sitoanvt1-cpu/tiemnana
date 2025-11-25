@@ -8,18 +8,16 @@
 /* ------------------- Cấu trúc chung ------------------- */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body { 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Font chuẩn iOS */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin:0; padding:0; background:#f0f0f0; 
     overflow: hidden; 
     height: 100vh; 
-    height: 100dvh; /* Hỗ trợ iOS 15+ */
+    height: 100dvh; 
 }
 
-/* --- QUAN TRỌNG: SỬA LỖI NÚT BẤM TRÊN IOS --- */
+/* --- NÚT BẤM TRÊN IOS/MOBILE --- */
 button {
-    -webkit-appearance: none; /* Tắt giao diện mặc định của iOS */
-    appearance: none;
-    touch-action: manipulation;
+    -webkit-appearance: none; appearance: none; touch-action: manipulation;
 }
 
 header { 
@@ -84,8 +82,8 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
 
 /* ------------------- Nút Bàn ------------------- */
 .btn-table { 
-    min-width: 80px; /* Chiều rộng tối thiểu */
-    min-height: 60px; /* QUAN TRỌNG: Chiều cao cứng để iOS hiển thị */
+    min-width: 80px; 
+    min-height: 60px; 
     height: auto;
     border-radius:6px; border:2px solid transparent; 
     color:white; font-weight:bold; cursor:pointer; 
@@ -125,8 +123,9 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
     flex: 0 0 auto; min-height: 30px; display: flex; align-items: center; justify-content: center;
 }
 
+/* CSS cho nút chọn món */
 .menu-item .sizes { 
-    display: grid; grid-template-columns: 1fr 1fr; 
+    display: grid; grid-template-columns: 1fr; /* Mặc định 1 cột (do bỏ size L) */
     gap: 3px; width: 100%; flex: 1 1 auto; 
 } 
 
@@ -134,13 +133,16 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
     border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold; 
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     font-size: 0.75em; line-height: 1.1; padding: 2px;
-    min-height: 40px; /* QUAN TRỌNG: Chiều cao cứng cho nút menu */
+    min-height: 40px; 
     width: 100%;
-    background: rgba(0,0,0,0.4); /* Tăng độ đậm nền để dễ nhìn hơn */
+    background: rgba(0,0,0,0.4);
     transition: 0.2s; word-wrap: break-word; 
 } 
 .menu-item .sizes button:active { background: rgba(0,0,0,0.7); }
 .menu-item .sizes button span.price { font-size: 0.9em; color: #fff; margin-top: 2px; }
+
+/* Nút Up Size đặc biệt */
+.btn-upsize { background: linear-gradient(45deg, #2c3e50, #34495e) !important; font-size: 1em !important; color: #f1c40f !important; border: 1px dashed #f1c40f !important;}
 
 /* --- MÀU SẮC THEO NHÓM MÓN --- */
 .cat-suachua { background-color: #d6eaf8; border-color: #3498db; }
@@ -154,10 +156,11 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
 .cat-tra { background-color: #d5f5e3; border-color: #2ecc71; }
 .cat-tra .name { color: #145a32; }
 
-/* Đồ chiên & Topping */
+/* Đồ chiên & Topping & Đồ ăn */
 .menu-item-fried { height: auto; min-height: 50px; justify-content: center; background: #ecf0f1; padding: 0;}
 .fried-btn { width: 100%; height: 100%; min-height: 45px; border: none; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; font-weight: bold; font-size: 0.8em; }
 .topping-btn { background: #9b59b6; } 
+.food-btn { background: #d35400; }
 
 /* ------------------- Modal ------------------- */
 .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
@@ -167,63 +170,42 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
 .btn-danger { background: #e74c3c; color: white; padding:10px 15px; border:none; border-radius:5px; font-size: 16px;}
 
 /* ================== MOBILE OPTIMIZATION ================== */
-
-/* 1. Màn hình Dọc (Portrait) */
 @media (orientation: portrait) {
     body { overflow: auto; height: auto; min-height: 100vh; }
     .main { height: auto; }
     .pos-layout { 
-        display: flex; 
-        flex-direction: column; 
-        height: auto; 
-        overflow-y: visible; 
-        padding-bottom: 20px;
+        display: flex; flex-direction: column; 
+        height: auto; overflow-y: visible; padding-bottom: 20px;
     }
     .top-areas { 
-        height: auto; 
-        min-height: 90px; 
-        padding: 10px 5px; 
+        height: auto; min-height: 90px; padding: 10px 5px; 
         position: sticky; top: 0; z-index: 100;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .right-panel { 
-        order: 2; 
-        width: 100%; 
-        min-height: 200px; 
-        max-height: 300px;
+        order: 2; width: 100%; min-height: 200px; max-height: 300px;
         margin-bottom: 10px; 
     }
     .menu-section-drinks { order: 3; overflow-y: visible; max-height: none; }
     .menu-section-fried { order: 4; overflow-y: visible; max-height: none; }
 
     .bottom-controls { 
-        order: 5; 
-        flex-direction: row; 
+        order: 5; flex-direction: row; 
         position: fixed; bottom: 0; left: 0; width: 100%;
         padding: 10px; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        z-index: 200;
-        gap: 10px;
+        z-index: 200; gap: 10px;
         padding-bottom: env(safe-area-inset-bottom, 10px); 
     }
     .bottom-controls button { padding: 12px; }
     .pos-layout { padding-bottom: 80px; }
 }
-
-/* 2. Màn hình Ngang (Landscape) */
 @media (orientation: landscape) and (max-height: 600px) {
     header { font-size: 0.8em; padding: 2px; height: 30px; }
     h1 { font-size: 1em; }
     .main { height: calc(100vh - 30px); height: calc(100dvh - 30px); }
-    .pos-layout {
-        grid-template-rows: 70px auto 45px; 
-        padding: 5px;
-        gap: 5px;
-        padding-left: env(safe-area-inset-left); 
-        padding-right: env(safe-area-inset-right);
-    }
+    .pos-layout { grid-template-rows: 70px auto 45px; padding: 5px; gap: 5px; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
     .menu-item { min-height: 100px; }
     .menu-item .name { font-size: 0.75em; min-height: 25px; }
-    /* Giữ kích thước nút bàn */
     .btn-table { min-width: 70px; min-height: 55px; font-size: 0.75em; }
     .bottom-controls button { font-size: 0.8em; padding: 0 5px; }
 }
@@ -265,32 +247,40 @@ h1 { margin:0; font-size:1.1em; white-space: nowrap; overflow: hidden; text-over
 <script>
 const tablesList = Array.from({length: 12}, (_, i) => `Bàn ${i + 1}`);
 
+/* --- CẬP NHẬT MENU THEO YÊU CẦU --- */
 const menuData = [
-    { cat: "cat-suachua", name: "Sữa chua đánh đá", opts: [{s:"M",p:20000}, {s:"L",p:25000}] },
-    { cat: "cat-suachua", name: "Sữa chua Việt quất", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-suachua", name: "Sữa chua Chanh dây", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-suachua", name: "Sữa chua Xoài", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-suachua", name: "Sữa chua Dâu", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-latte", name: "Latte Việt quất", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-latte", name: "Latte Dâu", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-latte", name: "Khoai môn Latte", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-latte", name: "Matcha Latte", opts: [{s:"M",p:25000}, {s:"L",p:30000}] },
-    { cat: "cat-trasua", name: "Trà sữa Truyền thống", opts: [{s:"M Trân",p:18000}, {s:"M Full",p:25000}, {s:"L Trân",p:23000}, {s:"L Full",p:30000}] },
-    { cat: "cat-trasua", name: "Trà sữa Thái xanh", opts: [{s:"M Trân",p:18000}, {s:"M Full",p:25000}, {s:"L Trân",p:23000}, {s:"L Full",p:30000}] },
-    { cat: "cat-trasua", name: "Trà sữa Gạo rang", opts: [{s:"M Trân",p:18000}, {s:"M Full",p:25000}, {s:"L Trân",p:23000}, {s:"L Full",p:30000}] },
-    { cat: "cat-trasua", name: "Trà sữa Olong", opts: [{s:"M Trân",p:18000}, {s:"M Full",p:25000}, {s:"L Trân",p:23000}, {s:"L Full",p:30000}] },
-    { cat: "cat-cafe", name: "Cà phê muối", opts: [{s:"M",p:15000}, {s:"L",p:20000}] },
-    { cat: "cat-cafe", name: "Nâu lắc", opts: [{s:"M",p:15000}, {s:"L",p:20000}] },
-    { cat: "cat-cafe", name: "Ca cao sữa nóng", opts: [{s:"M",p:15000}, {s:"L",p:20000}] },
-    { cat: "cat-tra", name: "Trà tắc", opts: [{s:"M",p:13000}, {s:"L",p:15000}] },
-    { cat: "cat-tra", name: "Trà chanh", opts: [{s:"M",p:13000}, {s:"L",p:15000}] },
+    // ĐÃ XÓA SIZE L Ở TẤT CẢ CÁC MÓN
+    { cat: "cat-suachua", name: "Sữa chua đánh đá", opts: [{s:"M",p:20000}] },
+    { cat: "cat-suachua", name: "Sữa chua Việt quất", opts: [{s:"M",p:25000}] },
+    { cat: "cat-suachua", name: "Sữa chua Chanh dây", opts: [{s:"M",p:25000}] },
+    { cat: "cat-suachua", name: "Sữa chua Xoài", opts: [{s:"M",p:25000}] },
+    { cat: "cat-suachua", name: "Sữa chua Dâu", opts: [{s:"M",p:25000}] },
+    { cat: "cat-latte", name: "Latte Việt quất", opts: [{s:"M",p:25000}] },
+    { cat: "cat-latte", name: "Latte Dâu", opts: [{s:"M",p:25000}] },
+    { cat: "cat-latte", name: "Khoai môn Latte", opts: [{s:"M",p:25000}] },
+    { cat: "cat-latte", name: "Matcha Latte", opts: [{s:"M",p:25000}] },
+    
+    // MÓN MỚI THÊM
+    { cat: "cat-latte", name: "Khoai môn sữa dừa PM", opts: [{s:"M",p:25000}] }, 
+
+    // CẬP NHẬT TRÀ SỮA: Trân châu, Sốt phô mai dẻo, Fulltopping
+    { cat: "cat-trasua", name: "Trà sữa Truyền thống", opts: [{s:"Trân châu",p:18000}, {s:"Sốt PM Dẻo",p:25000}, {s:"Fulltopping",p:25000}] },
+    { cat: "cat-trasua", name: "Trà sữa Thái xanh", opts: [{s:"Trân châu",p:18000}, {s:"Sốt PM Dẻo",p:25000}, {s:"Fulltopping",p:25000}] },
+    { cat: "cat-trasua", name: "Trà sữa Gạo rang", opts: [{s:"Trân châu",p:18000}, {s:"Sốt PM Dẻo",p:25000}, {s:"Fulltopping",p:25000}] },
+    { cat: "cat-trasua", name: "Trà sữa Olong", opts: [{s:"Trân châu",p:18000}, {s:"Sốt PM Dẻo",p:25000}, {s:"Fulltopping",p:25000}] },
+    
+    { cat: "cat-cafe", name: "Cà phê muối", opts: [{s:"M",p:15000}] },
+    { cat: "cat-cafe", name: "Nâu lắc", opts: [{s:"M",p:15000}] },
+    { cat: "cat-cafe", name: "Ca cao sữa nóng", opts: [{s:"M",p:15000}] },
+    { cat: "cat-tra", name: "Trà tắc", opts: [{s:"M",p:13000}] },
+    { cat: "cat-tra", name: "Trà chanh", opts: [{s:"M",p:13000}] },
 ];
 
 const toppings = [
     {name:"Jerry",price:7000},
     {name:"Chân mèo",price:5000},
-    {name:"Bánh flan",price:5000},
-    {name:"Trân châu",price:5000}
+    {name:"Bánh flan",price:7000}, // Đổi giá 7k
+    {name:"Topping khác",price:5000} // Đổi tên
 ];
 
 const friedItems = [
@@ -299,9 +289,17 @@ const friedItems = [
     {name:"HS tẩm cốm",price:3000},
     {name:"Nem chua rán",price:5000},
     {name:"Khoai lệ phố",price:5000},
+    {name:"Tôm hình",price:3000}, // Thêm tôm hình
     {name:"Xúc xích",price:10000},
     {name:"Dồi sụn",price:10000},
     {name:"Phô mai que",price:10000}
+];
+
+// THÊM MỤC ĐỒ ĂN
+const foodItems = [
+    {name:"Mỳ trộn 15k", price:15000},
+    {name:"Mỳ trộn 20k", price:20000},
+    {name:"Khoai tây lắc PM", price:30000}
 ];
 
 let orders=JSON.parse(localStorage.getItem('orders')) || {};
@@ -421,12 +419,25 @@ function renderMenu(){
     const div=document.createElement("div");
     div.className=`menu-item ${item.cat}`;
     let btnHtml = "";
+    
+    // Trà sữa có 3 option nên giữ style đặc biệt nếu cần
+    if(item.opts.length > 1) div.querySelector('.sizes')?.setAttribute('style', 'grid-template-columns: 1fr 1fr');
+
     item.opts.forEach(opt => {
-        btnHtml += `<button onclick="addItem('${item.name}', ${opt.p}, '${opt.s}')">${opt.s}<span class="price">${opt.p/1000}k</span></button>`;
+        // Ẩn chữ "M" nếu chỉ có 1 size
+        const sizeLabel = (item.opts.length === 1 && opt.s === "M") ? "" : opt.s;
+        btnHtml += `<button onclick="addItem('${item.name}', ${opt.p}, '${opt.s}')">${sizeLabel}<span class="price">${opt.p/1000}k</span></button>`;
     });
     div.innerHTML=`<div class="name">${item.name}</div><div class="sizes">${btnHtml}</div>`;
     drinksGrid.appendChild(div);
   });
+
+  // --- NÚT UP SIZE (+5k) ---
+  const upSizeDiv = document.createElement("div");
+  upSizeDiv.className = "menu-item";
+  upSizeDiv.style.border = "none"; 
+  upSizeDiv.innerHTML = `<div class="sizes" style="height:100%;"><button class="btn-upsize" onclick="addUpSize()">UP SIZE<br>+5k</button></div>`;
+  drinksGrid.appendChild(upSizeDiv);
 
   const friedDiv=document.getElementById("fried");
   friedDiv.innerHTML=``; 
@@ -448,14 +459,36 @@ function renderMenu(){
     div.innerHTML=`<button class="fried-btn" onclick="addItem('${f.name}',${f.price},'')">${f.name}<br>${f.price/1000}K</button>`;
     friedGrid.appendChild(div);
   });
+
+  // --- MỤC ĐỒ ĂN MỚI ---
+  friedDiv.innerHTML += `<div class="menu-subtitle" style="margin-top:10px;">Đồ ăn</div><div class="menu-grid" id="grid-food"></div>`;
+  const foodGrid = friedDiv.querySelector("#grid-food");
+  foodItems.forEach(f=>{
+      const div=document.createElement("div");
+      div.className="menu-item menu-item-fried";
+      div.innerHTML=`<button class="fried-btn food-btn" onclick="addItem('${f.name}',${f.price},'')">${f.name}<br>${f.price/1000}K</button>`;
+      foodGrid.appendChild(div);
+  });
+}
+
+function addUpSize() {
+    if (!selected || selected === "") selected = "T0";
+    // Kiểm tra điều kiện: Phải có món trước khi UP SIZE
+    if (orders[selected].items.length === 0) {
+        showModal("Thông báo", "Vui lòng chọn đồ uống trước khi chọn UP SIZE.");
+        return;
+    }
+    addItem("UP SIZE", 5000, "");
 }
 
 function addItem(name,price,size){
   if(!selected) selected = "T0";
   saveHistory();
+  // Cộng dồn nếu trùng tên, giá, size
   let exist=orders[selected].items.find(i=>i.name===name && i.price===price && i.size===size);
   if(exist) exist.qty+=1;
   else orders[selected].items.push({name,qty:1,price,size});
+  
   orders[selected].history.push({name,qty:1,price,size,time:new Date().toLocaleTimeString(), table:selected});
   orders[selected].paid = false; 
   saveData(); renderTables(); updateNote();
@@ -519,7 +552,10 @@ function clearTableAction(t, amountPaid, isLost = false){
         const lostAmount = currentTotal - orders[t].paidAmount;
         if (lostAmount > 0) {
           cumulativeLost += lostAmount; 
-          lostDetails.push({ table: t, amount: lostAmount, time: new Date().toLocaleString() });
+          // --- SỬA LỖI THỜI GIAN (CHỈ LẤY GIỜ:PHÚT) ---
+          const now = new Date();
+          const timeString = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+          lostDetails.push({ table: t, amount: lostAmount, time: timeString });
         }
       }
   }
@@ -570,7 +606,7 @@ function showStats(){
     lostTableHTML = `<h4 style="margin:10px 0 5px 0; color:#c0392b;">❌ Thất thoát: ${formatCurrency(cumulativeLost)}</h4>
       <div style="max-height:150px; overflow-y:auto;"><table class="stats-table" style="width:100%; font-size:0.8em;">
         <thead><tr style="background:#fce4e4;"><th>Bàn</th><th>Mất</th><th>Giờ</th></tr></thead>
-        <tbody>${lostDetails.map(d => `<tr><td>${d.table}</td><td>${formatCurrency(d.amount)}</td><td>${d.time.split(' ')[1]}</td></tr>`).join('')}</tbody>
+        <tbody>${lostDetails.map(d => `<tr><td>${d.table}</td><td>${formatCurrency(d.amount)}</td><td>${d.time}</td></tr>`).join('')}</tbody>
       </table></div><hr>`;
   }
   const statMsg = `<h3>THỐNG KÊ NGÀY</h3><p>Doanh Thu: <span style="font-size:1.2em; color:#2ecc71;">${formatCurrency(totalRevenue)}</span></p>${lostTableHTML}<h4>Món bán chạy:</h4>${detailsHTML}`;
