@@ -260,8 +260,10 @@ const menuData = [
     { cat: "cat-latte", name: "Khoai môn Latte", opts: [{s:"M",p:25000}] },
     { cat: "cat-latte", name: "Matcha Latte", opts: [{s:"M",p:25000}] },
     
-    // MÓN MỚI THÊM
     { cat: "cat-latte", name: "Khoai môn sữa dừa PM", opts: [{s:"M",p:25000}] }, 
+
+    // MÓN MỚI THÊM: Sữa tươi trân châu đường đen
+    { cat: "cat-trasua", name: "Sữa tươi TC đường đen", opts: [{s:"M",p:20000}] },
 
     // CẬP NHẬT TRÀ SỮA: Trân châu, Sốt phô mai dẻo, Fulltopping
     { cat: "cat-trasua", name: "Trà sữa Truyền thống", opts: [{s:"Trân châu",p:16000}, {s:"Sốt PM Dẻo",p:25000}, {s:"Fulltopping",p:25000}] },
@@ -278,7 +280,7 @@ const menuData = [
 
 const toppings = [
     {name:"Jerry",price:7000},
-    {name:"Chân mèo",price:5000},
+    {name:"Chân mèo",price:7000},
     {name:"Bánh flan",price:7000}, // Đổi giá 7k
     {name:"Topping khác",price:5000} // Đổi tên
 ];
@@ -530,7 +532,7 @@ function prepareClearTable(t){
   let bodyHTML, buttonsHTML;
   if (needToPay > 0) {
     bodyHTML = `Bàn <strong>${t}</strong> còn thiếu <strong>${formatCurrency(needToPay)}</strong>.`;
-    buttonsHTML = `
+    buttonsHTML = `<br>
       <button class="btn-primary" onclick="clearTableAction('${t}', ${needToPay})">TT Đủ & Dọn</button>
       <button class="btn-danger" onclick="clearTableAction('${t}', 0, true)">Mất tiền & Dọn</button>
       <button class="btn-secondary" onclick="document.getElementById('myModal').style.display='none'">Thoát</button>
@@ -619,4 +621,3 @@ renderTables(); renderMenu(); updateNote();
 </script>
 </body>
 </html>
-
